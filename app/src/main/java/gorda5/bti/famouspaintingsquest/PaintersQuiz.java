@@ -2,6 +2,7 @@ package gorda5.bti.famouspaintingsquest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -57,8 +58,18 @@ public class PaintersQuiz extends AppCompatActivity implements View.OnClickListe
                 "Leonardo da Vinci",
                 "Salvador Dali",
                 "answer2",
-                "It's a RIGHT answer.\n\nVertumnus painting is Arcimboldo's most famous work and is a portrait of the Holy Roman Emperor Rudolf II re-imagined as Vertumnus, the Roman god of metamorphoses in nature and life",
+                "It's a RIGHT answer.\n\nVertumnus painting is Arcimboldo's most famous work and is a portrait of the Holy Roman Emperor Rudolf II re-imagined as Vertumnus, the Roman god of metamorphoses in nature and life.",
                 "Your answer is WRONG.\n\nThis is a painting Vertumnus by painter Giuseppe Arcimboldo"
+        ));
+        questions.add(new Question(
+                R.drawable.the_persistence_of_memory,
+                "Salvador Dali",
+                "Gustav Klimt",
+                "Johannes Vermeer",
+                "Franz Marc",
+                "answer1",
+                "It's a RIGHT answer.\n\nThe Persistence of Memory is a 1931 painting by artist Salvador Dalí, and one of the most recognizable works of Surrealism. It is widely recognized and frequently referenced in popular culture, and sometimes referred to by more descriptive (though incorrect) titles, such as \"Melting Clocks\", \"The Soft Watches\" or \"The Melting Watches\".",
+                "Your answer is WRONG.\n\nThe Persistence of Memory is a painting by artist Salvador Dali"
         ));
     }
 
@@ -103,17 +114,24 @@ public class PaintersQuiz extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         String pressed = buttons.get(v.getId());
-        Log.d("GORDA5", pressed);
         if(isAnswered && pressed.equals("answer4")){
-            isAnswered = false;
-            drawQuestion();
+            if(currentQuestion < questions.size()) {
+                isAnswered = false;
+                drawQuestion();
+            } else {
+                Intent nextScreen = new Intent(PaintersQuiz.this, Results.class);
+                nextScreen.putExtra("score", scores);
+                startActivity(nextScreen);
+            }
         } else if (!isAnswered){
             if(pressed.equals(question.getCorrectId())) {
                 isAnswered = true;
                 scores++;
+                currentQuestion++;
                 drawRight(pressed);
             } else {
                 isAnswered = true;
+                currentQuestion++;
                 drawWrong(pressed);
             }
         }
