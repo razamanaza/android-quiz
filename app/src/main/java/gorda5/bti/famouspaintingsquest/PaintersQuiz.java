@@ -19,11 +19,14 @@ public class PaintersQuiz extends AppCompatActivity implements View.OnClickListe
     private HashMap<Integer, String> buttons = new HashMap<Integer, String>();
     private ArrayList<Question> questions = new ArrayList<Question>();
     private int currentQuestion = 0;
+    Question question;
     private Button answer1;
     private Button answer2;
     private Button answer3;
     private Button answer4;
     private TextView picture;
+    boolean isAnswered = false;
+    int scores = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,30 +57,66 @@ public class PaintersQuiz extends AppCompatActivity implements View.OnClickListe
                 "Leonardo da Vinci",
                 "Salvador Dali",
                 "answer2",
-                "It's a RIGHT answer.\nVertumnus painting is Arcimboldo's most famous work and is a portrait of the Holy Roman Emperor Rudolf II re-imagined as Vertumnus, the Roman god of metamorphoses in nature and life",
-                "Your answer is WRONG.\nThis is a painting Vertumnus by Mannerist painter Giuseppe Arcimboldo"
+                "It's a RIGHT answer.\n\nVertumnus painting is Arcimboldo's most famous work and is a portrait of the Holy Roman Emperor Rudolf II re-imagined as Vertumnus, the Roman god of metamorphoses in nature and life",
+                "Your answer is WRONG.\n\nThis is a painting Vertumnus by painter Giuseppe Arcimboldo"
         ));
     }
 
     private void drawQuestion() {
-        Question question = questions.get(currentQuestion);
+        question = questions.get(currentQuestion);
         picture.setBackgroundResource(question.getQuestion());
         picture.setText("");
         answer1.setText(question.getAnswer1());
+        answer1.setBackgroundColor(Color.parseColor("#BF360C"));
         answer2.setText(question.getAnswer2());
+        answer2.setVisibility(View.VISIBLE);
         answer3.setText(question.getAnswer3());
+        answer3.setVisibility(View.VISIBLE);
         answer4.setText(question.getAnswer4());
+        answer4.setBackgroundColor(Color.parseColor("#BF360C"));
+    }
+
+    private void drawRight(String pressed) {
+        picture.setBackgroundResource(0);
+        picture.setText(question.getCorrectText());
+        picture.setTextColor(Color.parseColor("#33691E"));
+        answer1.setText(question.getAnswer(pressed));
+        answer1.setBackgroundColor(Color.parseColor("#33691E"));
+        answer2.setVisibility(View.INVISIBLE);
+        answer3.setVisibility(View.INVISIBLE);
+        answer4.setText("Next");
+        answer4.setBackgroundColor(Color.parseColor("#01579B"));
+    }
+
+    private void drawWrong(String pressed) {
+        picture.setBackgroundResource(0);
+        picture.setText(question.getWrongText());
+        picture.setTextColor(Color.parseColor("#BF360C"));
+        answer1.setText(question.getAnswer(pressed));
+        answer1.setBackgroundColor(Color.parseColor("#BF360C"));
+        answer2.setVisibility(View.INVISIBLE);
+        answer3.setVisibility(View.INVISIBLE);
+        answer4.setText("Next");
+        answer4.setBackgroundColor(Color.parseColor("#01579B"));
     }
 
     @Override
     public void onClick(View v) {
-
-        Question question = questions.get(currentQuestion);
         String pressed = buttons.get(v.getId());
-        if(pressed.equals(question.getCorrectId())) {
-            picture.setBackgroundResource(0);
-            picture.setText(question.getCorrectText());
-            picture.setTextColor(Color.rgb(0, 77, 64));
+        Log.d("GORDA5", pressed);
+        if(isAnswered && pressed.equals("answer4")){
+            isAnswered = false;
+            drawQuestion();
+        } else if (!isAnswered){
+            if(pressed.equals(question.getCorrectId())) {
+                isAnswered = true;
+                scores++;
+                drawRight(pressed);
+            } else {
+                isAnswered = true;
+                drawWrong(pressed);
+            }
         }
+
     }
 }

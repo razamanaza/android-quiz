@@ -98,4 +98,19 @@ public class Question {
                 ", wrongText='" + wrongText + '\'' +
                 '}';
     }
+
+    public String getAnswer(String id) {
+        switch (id) {
+            case "answer1":
+                return this.getAnswer1();
+            case "answer2":
+                return this.getAnswer2();
+            case "answer3":
+                return this.getAnswer3();
+            case "answer4":
+                return this.getAnswer4();
+            default:
+                return "";
+        }
+    }
 }
