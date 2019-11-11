@@ -4,6 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg2"
     tools:context=".PaintersQuiz">
 
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Who is the author of this picture?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/picture"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionText" />
+
+    <Button
+        android:id="@+id/answer1"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:text="answer 1"
+        app:layout_constraintBottom_toTopOf="@+id/answer2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/answer2"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:text="answer 2"
+        app:layout_constraintBottom_toTopOf="@+id/answer3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/answer3"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:text="answer 3"
+        app:layout_constraintBottom_toTopOf="@+id/answer4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/answer4"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorPrimary"
+        android:text="answer 4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
