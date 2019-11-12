@@ -1,22 +1,53 @@
 package gorda5.bti.famouspaintingsquest;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
 public class Question {
     private String question;
-    private String answer1;
-    private String answer2;
-    private String answer3;
-    private String answer4;
+    private String[] answers = new String[4];
     private String correctText;
-    private String correctId;
+    private int correctId;
+    private ArrayList<String> artists = new ArrayList<>(Arrays.asList(
+            "Andy Warhol",
+            "Bill Hammond",
+            "Giuseppe Arcimboldo",
+            "Gottfried Lindauer",
+            "Ivan Aivazovsky",
+            "Kazimir Malevich",
+            "Leonardo da Vinci",
+            "Pablo Picasso",
+            "Salvador Dali",
+            "Vincent van Gogh",
+            "Michelangelo",
+            "Henri Matisse",
+            "Jackson Pollock",
+            "Edvard Munch",
+            "Claude Monet",
+            "Rene Magritte",
+            "Frida Kahlo",
+            "Yayoi Kusama",
+            "Sandro Botticelli",
+            "Paul Gauguin"
+    ));
 
-    public Question(String question, String answer1, String answer2, String answer3, String answer4, String correctId, String correctText) {
+    private int random(int max) {
+        Random rand = new Random();
+        return rand.nextInt(max);
+    }
+
+    public Question(String question, String answer, String correctText) {
         this.question = question;
-        this.answer1 = answer1;
-        this.answer2 = answer2;
-        this.answer3 = answer3;
-        this.answer4 = answer4;
-        this.correctId = correctId;
         this.correctText = correctText;
+        this.correctId = random(3);
+        artists.remove(answer);
+        for(int i = 3; i >= 0; i--){
+            int index = random(i + 16);
+            answers[i] = i == this.correctId ? answer : artists.get(index);
+            artists.remove(artists.get(index));
+        }
     }
 
     public String getQuestion() {
@@ -24,23 +55,23 @@ public class Question {
     }
 
     public String getAnswer1() {
-        return answer1;
+        return answers[0];
     }
 
     public String getAnswer2() {
-        return answer2;
+        return answers[1];
     }
 
     public String getAnswer3() {
-        return answer3;
+        return answers[2];
     }
 
     public String getAnswer4() {
-        return answer4;
+        return answers[3];
     }
 
     public String getCorrectId() {
-        return correctId;
+        return "answer" + (correctId + 1);
     }
 
     public String getCorrectText() {
@@ -52,22 +83,22 @@ public class Question {
     }
 
     public void setAnswer1(String answer1) {
-        this.answer1 = answer1;
+        this.answers[0] = answer1;
     }
 
     public void setAnswer2(String answer2) {
-        this.answer2 = answer2;
+        this.answers[1] = answer2;
     }
 
     public void setAnswer3(String answer3) {
-        this.answer3 = answer3;
+        this.answers[2] = answer3;
     }
 
     public void setAnswer4(String answer4) {
-        this.answer4 = answer4;
+        this.answers[3] = answer4;
     }
 
-    public void setCorrectId(String correctId) {
+    public void setCorrectId(int correctId) {
         this.correctId = correctId;
     }
 
@@ -79,10 +110,10 @@ public class Question {
     public String toString() {
         return "Question{" +
                 "question='" + question + '\'' +
-                ", answer1='" + answer1 + '\'' +
-                ", answer2='" + answer2 + '\'' +
-                ", answer3='" + answer3 + '\'' +
-                ", answer4='" + answer4 + '\'' +
+                ", answer1='" + answers[0] + '\'' +
+                ", answer2='" + answers[1] + '\'' +
+                ", answer3='" + answers[2] + '\'' +
+                ", answer4='" + answers[3] + '\'' +
                 ", correctId=" + correctId +
                 ", correctText='" + correctText + '\'' +
                 '}';
