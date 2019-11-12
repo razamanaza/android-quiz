@@ -1,16 +1,15 @@
 package gorda5.bti.famouspaintingsquest;
 
 public class Question {
-    private int question;
+    private String question;
     private String answer1;
     private String answer2;
     private String answer3;
     private String answer4;
     private String correctText;
-    private String wrongText;
     private String correctId;
 
-    public Question(int question, String answer1, String answer2, String answer3, String answer4, String correctId, String correctText, String wrongText) {
+    public Question(String question, String answer1, String answer2, String answer3, String answer4, String correctId, String correctText) {
         this.question = question;
         this.answer1 = answer1;
         this.answer2 = answer2;
@@ -18,10 +17,9 @@ public class Question {
         this.answer4 = answer4;
         this.correctId = correctId;
         this.correctText = correctText;
-        this.wrongText = wrongText;
     }
 
-    public int getQuestion() {
+    public String getQuestion() {
         return question;
     }
 
@@ -49,11 +47,7 @@ public class Question {
         return correctText;
     }
 
-    public String getWrongText() {
-        return wrongText;
-    }
-
-    public void setQuestion(int question) {
+    public void setQuestion(String question) {
         this.question = question;
     }
 
@@ -81,10 +75,6 @@ public class Question {
         this.correctText = correctText;
     }
 
-    public void setWrongText(String wrongText) {
-        this.wrongText = wrongText;
-    }
-
     @Override
     public String toString() {
         return "Question{" +
@@ -95,7 +85,6 @@ public class Question {
                 ", answer4='" + answer4 + '\'' +
                 ", correctId=" + correctId +
                 ", correctText='" + correctText + '\'' +
-                ", wrongText='" + wrongText + '\'' +
                 '}';
     }
 
