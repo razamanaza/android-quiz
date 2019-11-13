@@ -90,7 +90,7 @@ public class PaintersQuiz extends AppCompatActivity implements View.OnClickListe
         questions.add(new Question(
                 "portrait_of_wahanui_reihana_te_huatare",
                 "Gottfried Lindauer",
-                "Gottfried Lindauer (5 January 1839[1] – 13 June 1926) was a Bohemian and New Zealand artist famous for his portraits, including many of Māori people."
+                "Gottfried Lindauer (5 January 1839[1] – 13 June 1926) was a Bohemian and New Zealand artist famous for his portraits, including many of Maori people."
         ));
         questions.add(new Question(
                 "the_mona_lisa",
